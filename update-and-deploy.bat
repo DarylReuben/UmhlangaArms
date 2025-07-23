@@ -9,8 +9,10 @@ set i=0
 (for /f "delims=" %%a in ('git log --oneline') do (
     set /a i=!i!+1
     set "commitline[!i!]=%%a"
-    set "commitnum[!i!]=%%a"
-    echo !i!. %%a
+    for /f "tokens=1,*" %%h in ("%%a") do (
+        set "commitnum[!i!]=%%h"
+        echo !i!. %%a
+    )
     if "!i!"=="1" set latesthash=%%a
 )) > commitlist.txt
 
@@ -56,7 +58,7 @@ if "%choice%"=="2" (
     set /p num="Enter the number of the version to revert to: "
     set hash=
     for /l %%j in (1,1,!count!) do (
-        if "%%j"=="%num%" set hash=!commitnum[%%j]:~0,7!
+        if "%%j"=="%num%" set hash=!commitnum[%%j]!
     )
     if "%hash%"=="" (
         echo Invalid selection.

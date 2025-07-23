@@ -1,5 +1,6 @@
-1. b5b1274 Updated script
-2. dbe3c33 Test product card update
-3. 2d36416 update
-4. 5adcff9 Removed about
-5. 23d32a5 Initial commit
+1. 0046aa7 Update
+2. b5b1274 Updated script
+3. dbe3c33 Test product card update
+4. 2d36416 update
+5. 5adcff9 Removed about
+6. 23d32a5 Initial commit
