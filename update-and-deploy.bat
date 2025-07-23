@@ -1,7 +1,33 @@
 @echo off
 
-echo --- Commit History ---
-git log --oneline --decorate --graph --all
+REM Get the current commit hash
+for /f "delims=" %%a in ('git rev-parse HEAD') do set currenthash=%%a
+
+REM Build a numbered commit list
+setlocal enabledelayedexpansion
+set i=0
+(for /f "delims=" %%a in ('git log --oneline') do (
+    set /a i=!i!+1
+    set "commitline[!i!]=%%a"
+    set "commitnum[!i!]=%%a"
+    echo !i!. %%a
+    if "!i!"=="1" set latesthash=%%a
+)) > commitlist.txt
+
+REM Display commit list and highlight current HEAD
+set /a count=!i!
+set currentnum=
+for /l %%j in (1,1,!count!) do (
+    set "line=!commitline[%%j]!"
+    for /f "tokens=1,2*" %%k in ("!line!") do (
+        if "%%l"=="%currenthash:~0,7%" (
+            echo * Currently checked out: %%j. !line!
+            set currentnum=%%j
+        ) else (
+            echo   %%j. !line!
+        )
+    )
+)
 
 echo.
 echo What would you like to do?
@@ -27,7 +53,15 @@ if "%choice%"=="1" (
 )
 
 if "%choice%"=="2" (
-    set /p hash="Enter the commit hash to revert to: "
+    set /p num="Enter the number of the version to revert to: "
+    set hash=
+    for /l %%j in (1,1,!count!) do (
+        if "%%j"=="%num%" set hash=!commitnum[%%j]:~0,7!
+    )
+    if "%hash%"=="" (
+        echo Invalid selection.
+        goto :eof
+    )
     git reset --hard %hash%
     git push --force
     goto :eof
