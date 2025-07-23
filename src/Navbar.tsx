@@ -9,7 +9,6 @@ const Navbar = () => {
       </div>
       <div className="eca-navbar__links">
         <a href="#home">Home</a>
-        <a href="#about">About</a>
         <a href="#products">Products</a>
         <a href="#events">Events</a>
         <a href="#services">Services</a>
