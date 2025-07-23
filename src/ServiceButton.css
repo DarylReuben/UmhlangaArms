@@ -1,0 +1,29 @@
+.service-btn {
+  padding: 2rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 1.5rem;
+  border: none;
+  background: #232323;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), background 0.2s;
+  outline: none;
+}
+
+.service-btn:hover,
+.service-btn:focus {
+  transform: scale(1.08);
+  background: #181818;
+}
+
+.service-btn-text {
+  transition: color 0.12s cubic-bezier(0.4,0,0.2,1);
+  color: #fff;
+}
+
+.service-btn:hover .service-btn-text,
+.service-btn:focus .service-btn-text {
+  color: #ff2d2d;
+} 
