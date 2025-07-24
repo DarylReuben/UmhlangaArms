@@ -1,11 +1,12 @@
-1. 38e76e7 Removed some text as test
-2. a56b62c Stable update
-3. ae4af7e Stable
-4. 412fb81 Stable
-5. 57fb99f Update script fix
-6. 0046aa7 Update
-7. b5b1274 Updated script
-8. dbe3c33 Test product card update
-9. 2d36416 update
-10. 5adcff9 Removed about
-11. 23d32a5 Initial commit
+1. a6eda4b Admin test
+2. 38e76e7 Removed some text as test
+3. a56b62c Stable update
+4. ae4af7e Stable
+5. 412fb81 Stable
+6. 57fb99f Update script fix
+7. 0046aa7 Update
+8. b5b1274 Updated script
+9. dbe3c33 Test product card update
+10. 2d36416 update
+11. 5adcff9 Removed about
+12. 23d32a5 Initial commit
