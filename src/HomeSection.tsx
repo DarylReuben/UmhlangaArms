@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const HomeSection = () => {
+const HomeSection = ({ isAdmin }: { isAdmin?: boolean }) => {
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState<string[]>([]);
+  const [mainText, setMainText] = useState('');
+  const [editText, setEditText] = useState('');
+  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/api/home-text')
+      .then(res => res.json())
+      .then(data => {
+        setMainText(data.text);
+        setEditText(data.text);
+        setLoading(false);
+      });
+  }, []);
 
   const handleSend = () => {
     if (chatInput.trim() !== '') {
@@ -15,6 +30,24 @@ const HomeSection = () => {
     if (e.key === 'Enter') {
       handleSend();
     }
+  };
+
+  const handleEdit = () => {
+    setEditing(true);
+    setEditText(mainText);
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    await fetch('http://localhost:3001/api/home-text', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: editText }),
+    });
+    setMainText(editText);
+    setEditing(false);
+    setSaving(false);
+    window.location.reload();
   };
 
   return (
@@ -56,7 +89,21 @@ const HomeSection = () => {
         color: '#fff',
       }}>
         <h2>Home</h2>
-        <p>Welcome to Umhlanga Arms!</p>
+        {loading ? (
+          <p>Loading...</p>
+        ) : isAdmin && !editing ? (
+          <button onClick={handleEdit} style={{ marginBottom: '1rem', padding: '0.3rem 1rem', borderRadius: '0.5rem', border: 'none', background: '#ffc107', color: '#222', fontWeight: 'bold', cursor: 'pointer' }}>
+            Edit Text
+          </button>
+        ) : null}
+        {isAdmin && editing ? (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+            <textarea value={editText} onChange={e => setEditText(e.target.value)} rows={3} style={{ width: '100%', maxWidth: 400, borderRadius: '0.5rem', padding: '0.5rem' }} />
+            <button onClick={handleSave} disabled={saving} style={{ padding: '0.3rem 1rem', borderRadius: '0.5rem', border: 'none', background: '#28a745', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}>{saving ? 'Saving...' : 'Confirm Changes'}</button>
+          </div>
+        ) : !loading ? (
+          <p>{mainText}</p>
+        ) : null}
       </div>
       {/* Chatbox Section */}
       <div style={{
