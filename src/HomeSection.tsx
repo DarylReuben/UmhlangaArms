@@ -10,7 +10,7 @@ const HomeSection = ({ isAdmin }: { isAdmin?: boolean }) => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/home-text')
+    fetch('/.netlify/functions/home-text')
       .then(res => res.json())
       .then(data => {
         setMainText(data.text);
@@ -39,7 +39,7 @@ const HomeSection = ({ isAdmin }: { isAdmin?: boolean }) => {
 
   const handleSave = async () => {
     setSaving(true);
-    await fetch('http://localhost:3001/api/home-text', {
+    await fetch('/.netlify/functions/home-text', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: editText }),
