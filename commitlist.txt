@@ -1,7 +1,8 @@
-1. 57fb99f Update script fix
-2. 0046aa7 Update
-3. b5b1274 Updated script
-4. dbe3c33 Test product card update
-5. 2d36416 update
-6. 5adcff9 Removed about
-7. 23d32a5 Initial commit
+1. 412fb81 Stable
+2. 57fb99f Update script fix
+3. 0046aa7 Update
+4. b5b1274 Updated script
+5. dbe3c33 Test product card update
+6. 2d36416 update
+7. 5adcff9 Removed about
+8. 23d32a5 Initial commit

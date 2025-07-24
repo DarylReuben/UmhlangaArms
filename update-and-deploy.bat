@@ -64,7 +64,10 @@ if "%choice%"=="2" (
         echo Invalid selection.
         goto :eof
     )
-    git reset --hard %hash%
+    git reset --hard !hash!
+    echo.
+    echo Please review your code in Cursor. Press any key to continue and deploy, or Ctrl+C to cancel.
+    pause >nul
     git push --force
     goto :eof
 )
