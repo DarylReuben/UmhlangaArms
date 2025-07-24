@@ -56,7 +56,7 @@ const HomeSection = () => {
         color: '#fff',
       }}>
         <h2>Home</h2>
-        <p>Welcome to Umhlanga Arms! This is the home section.</p>
+        <p>Welcome to Umhlanga Arms!</p>
       </div>
       {/* Chatbox Section */}
       <div style={{
